@@ -1,5 +1,5 @@
 all: 	
-	elm make --yes src/Demo.elm --output=index.html --warn
+	elm make --yes src/Demo.elm --output=index.html #--warn
 
 
 clean:
