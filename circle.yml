@@ -16,7 +16,7 @@ dependencies:
     - sudo apt-get update
     - sudo apt-get install erlang 
     - npm install -g elm 
-    - make elm
+    - make 
    
 test:
   override:
