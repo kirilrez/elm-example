@@ -1,0 +1,24 @@
+
+general:
+  branches:
+    ignore:
+      - gh-pages # list of branches to ignore
+ 
+dependencies:
+  cache_directories:
+    - ~/nvm/
+    - elm/elm-stuff
+  pre:
+    - sudo apt-get update
+    - sudo apt-get update
+    - sudo apt-get install software-properties-common
+    - sudo add-apt-repository -y ppa:avsm/ppa
+    - sudo apt-get update
+    - sudo apt-get install erlang 
+    - npm install -g elm 
+    - make elm
+   
+test:
+  override:
+    - make elm-test
+
