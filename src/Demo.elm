@@ -1,46 +1,52 @@
-port module Demo exposing (..)
+module Demo exposing (..)
+
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.App exposing (map)
 
+type Color = Red
+    | Green
+    | Blue
+    | Purple
+    | Yellow
+      
+type alias Model ={
+        color : Color
+    }
 
+type Msg = Click
 
-type Msg  = Click | NoOp
-type Color = Red|Green|Blue
-
-type alias State = {buttonColor: Color}
-
+init : ( Model, Cmd Msg )
 init =
-    (State Red, Cmd.none)
+    (Model Red, Cmd.none)
 
-newColor color =
+
+nextColor color =
     case color of
-        Red   -> Green
+        Red -> Green
         Green -> Blue
-        Blue  -> Red
+        Blue -> Purple
+        Purple -> Green
 
-colorToString color = 
+                  
+displayColor color =
     case color of
-        Red   -> "#FF0000"
-        Green -> "#00FF00"
-        Blue  -> "#0000FF"
-    
-        
-update action model =
-    case action of
-        NoOp ->
-            (model, Cmd.none)
-        Click ->
-            ({model | buttonColor= newColor model.buttonColor},Cmd.none)
-
-
+        Red -> "red"
+        Green -> "green"
+        Blue ->  "blue"
+        Purple -> "purple"      
                 
-view model =
-    button[style [("backgroundColor", colorToString model.buttonColor)]
-          ,onClick Click
-          ][text "ClickMe"]
-    
+update action model = 
+    case action of
+        Click ->
+            ({model | color = nextColor model.color}, Cmd.none)
+
+view model = 
+    div[style [("backgroundColor", displayColor model.color)]
+        ,onClick Click]
+        [text "CLICK ME"]
+
 
 main : Program Never
 main =
